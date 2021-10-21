@@ -36,12 +36,14 @@ return index;
 
 prevBtn.addEventListener('click',function() {
  disableButton(prevBtn);
+ stopCarouselInterval()
 changeQuote(getQuoteIndex(),'prev');
 });
 
 
 nextBtn.addEventListener('click',function() {
 disableButton(nextBtn);
+stopCarouselInterval()
 changeQuote(getQuoteIndex(),'next');
 });
 
@@ -102,4 +104,24 @@ setTimeout(() => {
     element.classList.remove("disabled");
 }, 500);
 }
+
+var carouselInterval = setInterval(() => {
+    changeQuote(getQuoteIndex(),'next');
+}, 10000);
+
+ function stopCarouselInterval(){
+     clearInterval(carouselInterval);
+     setTimeout(() => {
+         startCarouselInterval();
+     }, 1000);
+
+ }
+
+ function startCarouselInterval(){
+     carouselInterval = setInterval(changeSlideAuto, 10000);;
+ }
+
+ var changeSlideAuto = function(){
+    changeQuote(getQuoteIndex(),'next');
+ }
 
